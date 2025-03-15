@@ -1,0 +1,44 @@
+vars: {
+  d2-config: {
+    layout-engine: elk
+    center: true
+  }
+}
+direction: right
+users: "Users" {shape: person}
+url_shortener: "URL Shortener" {
+  mobile_app: "Client \n(Mobile)"
+  web_app: "Client \n(Web)"
+  lb: "Load Balancer"
+  db: "Database" {
+    shape: image
+    icon: https://icons.terrastruct.com/essentials%2F117-database.svg
+  }
+  cache: "Cache" {
+    shape: image
+    icon: https://icons.terrastruct.com/azure%2FDatabases%20Service%20Color%2FAzure%20Cache%20plus%20Redis.svg
+  }
+  gateway: "API Gateway" {
+    style.multiple: true
+  }
+  url_service: "URL Generation Service" {
+    shape: square
+    style.multiple: true
+  }
+  redirection_service: "Redirection Service" {
+    shape: square
+    style.multiple: true
+  }
+
+  mobile_app -> lb
+  web_app -> lb
+  lb -> gateway
+  gateway -> url_service
+  gateway -> redirection_service
+  url_service -> db
+  redirection_service <- db
+  redirection_service <-> cache
+}
+
+users -> url_shortener.mobile_app
+users -> url_shortener.web_app
