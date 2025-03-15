@@ -18,8 +18,8 @@
 
 ## Design
 
-![architecture](./architecture.svg)
+![architecture](./diagrams/architecture.svg)
 
 ## Database schema
 
-![schema](./db-schema.svg)
+![db-schema](./diagrams/db-schema.svg)
