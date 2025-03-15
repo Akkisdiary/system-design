@@ -29,7 +29,7 @@
 - Peak RPS: 1200 * 10 = 12,000
 
 #### Storage
-- Short URL: 7 bytes
+- Short URL: 7 bytes (assuming 7 characters in short url)
 - Original URL: 100 bytes
 - Creation date: 8 bytes (timestamp)
 - Expiration date: 8 bytes (timestamp)
