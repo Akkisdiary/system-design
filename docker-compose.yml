@@ -1,0 +1,11 @@
+services:
+  url-shortener:
+    image: terrastruct/d2:v0.6.9
+    command:
+      - "--watch"
+      - "$D2_FILE"
+    platform: linux/amd64
+    ports:
+      - 8080:8080
+    volumes:
+      - ./url-shortener:/home/debian/src
