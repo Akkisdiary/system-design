@@ -43,8 +43,8 @@ Total storage per Year:
 
 ## Design
 
-![architecture](./diagrams/architecture.svg)
+![architecture](./diagrams/architecture.png)
 
 ## Database schema
 
-![db-schema](./diagrams/db-schema.svg)
+![db-schema](./diagrams/db-schema.png)
