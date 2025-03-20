@@ -14,7 +14,7 @@
 2. Low latency (url shortening and redirects should happen in milliseconds)
 3. Scalability (the system should handle millions of requests per day)
 4. Durability (shortened URLs should work for years)
-5. Security to prevent malicious use, such as phishing.
+5. Security to prevent malicious use, such as phishing
 
 ## Capacity estimation
 - Daily shorten url requests: 1 million
@@ -42,9 +42,22 @@ Total storage per Year:
 - **1M * 127 * 360 = 43.2 GB**
 
 ## Design
-
 ![architecture](./diagrams/architecture.png)
 
-## Database schema
+- LB - Load Balancer distributing requests across API servers
+- API Servers - Backend application servers handling url shorting and redirection requests
+- URL Generation Service - Creates short url and saves to DB
+- Redirection Service - Retrives original url based on the short url from Cache or DB and redirects the user to the original url
+- DB - Stores short url to original url mapping. Since the database needs high throughput to handle large number of reads as compared to writes and don't require joins between tables - A NoSQL DB like **Cassandra** is a good choice
+- Cache - Stores frequently accessed url for fast retrival. Eg. Redis/Memcache
 
+## Database schema
 ![db-schema](./diagrams/db-schema.png)
+
+### Unique short url generation
+##### Hanhing
+Encript the original url using MDN or SHA-256 and then encode the encripted url to a fix length string using base62 encoding. Base62 encoding with 7 characters provides large number of combinations (7^62 = 3.5 Trillion)
+To handle collision, re-encript the original url with a different seed or add an incremental suffic to the generate short url and re-encode using base62
+
+##### Auto Increment ID
+Use the database auto-increment ID to generate a number and encode it using base62. But this approach is very predictable and might become scalability bottelneck for the DB
