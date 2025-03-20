@@ -14,7 +14,6 @@
 2. Low latency (url shortening and redirects should happen in milliseconds)
 3. Scalability (the system should handle millions of requests per day)
 4. Durability (shortened URLs should work for years)
-5. Security to prevent malicious use, such as phishing
 
 ## Capacity estimation
 - Daily shorten url requests: 1 million
@@ -54,8 +53,9 @@ Total storage per Year:
 ## Database schema
 ![db-schema](./diagrams/db-schema.png)
 
-### Unique short url generation
-##### Hanhing
+### Highlights
+
+##### Hashing
 Encript the original url using MDN or SHA-256 and then encode the encripted url to a fix length string using base62 encoding. Base62 encoding with 7 characters provides large number of combinations (7^62 = 3.5 Trillion)
 To handle collision, re-encript the original url with a different seed or add an incremental suffic to the generate short url and re-encode using base62
 
