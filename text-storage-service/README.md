@@ -13,7 +13,13 @@
 
 ## Design
 ![architecture](./diagrams/architecture.png)
-- [design components descriptions]
+- LB - Load Balancer distributing requests across API servers
+- API Servers - Backend application servers handling create and read requests
+- Key Gen Service - Generates unique keys for creating the unique url. Uses Cache 2 to keep track of used and unused keys
+- DB - Stores short url to original url mapping. Since the database needs high throughput to handle large number of reads as compared to writes and don't require joins between tables - A NoSQL DB like **Cassandra** is a good choice
+- Cache 1 - Stores frequently accessed texts
+- Cache 2 - Distributed cached which stores used and unused keys
+- S3 - Storage for large text content
 
 ## Database schema
 ![db-schema](./diagrams/db-schema.png)
@@ -31,7 +37,8 @@ Avg reads per second: 12 * 10 = 120
 Peak RPS: 1200
 
 #### Storage
-- [storage calculations]
+- Text content per day: 1M * 100KB =~ 100GB (assuming 100KB text size avg)
+- Per year = 3.7TB
 
 ## Highlights
-- [list of important points related to the design]
+- When the text size is greater than some pre-defined value (say 100KB) then the text is stored in S3 and a link to the S3 file is store in DB. A small portion of the text also stored in the DB (first 100 KB) to show a preview of the text to the user. The front end application can then fetch the complete file using the S3 url
