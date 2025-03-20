@@ -15,6 +15,19 @@
 3. Scalability (the system should handle millions of requests per day)
 4. Durability (shortened URLs should work for years)
 
+## Design
+![architecture](./diagrams/architecture.png)
+
+- LB - Load Balancer distributing requests across API servers
+- API Servers - Backend application servers handling url shorting and redirection requests
+- URL Generation Service - Creates short url and saves to DB
+- Redirection Service - Retrives original url based on the short url from Cache or DB and redirects the user to the original url
+- DB - Stores short url to original url mapping. Since the database needs high throughput to handle large number of reads as compared to writes and don't require joins between tables - A NoSQL DB like **Cassandra** is a good choice
+- Cache - Stores frequently accessed url for fast retrival. Eg. Redis/Memcache
+
+## Database schema
+![db-schema](./diagrams/db-schema.png)
+
 ## Capacity estimation
 - Daily shorten url requests: 1 Million
 - Read/Write ratio: 100:1 (100 redirects for 1 shortened url per day)
@@ -40,18 +53,6 @@ Total Storage per url
 Total storage per Year: 
 - **1M * 127 * 360 = 43.2 GB**
 
-## Design
-![architecture](./diagrams/architecture.png)
-
-- LB - Load Balancer distributing requests across API servers
-- API Servers - Backend application servers handling url shorting and redirection requests
-- URL Generation Service - Creates short url and saves to DB
-- Redirection Service - Retrives original url based on the short url from Cache or DB and redirects the user to the original url
-- DB - Stores short url to original url mapping. Since the database needs high throughput to handle large number of reads as compared to writes and don't require joins between tables - A NoSQL DB like **Cassandra** is a good choice
-- Cache - Stores frequently accessed url for fast retrival. Eg. Redis/Memcache
-
-## Database schema
-![db-schema](./diagrams/db-schema.png)
 
 ### Highlights
 
