@@ -1,11 +1,9 @@
 # [serivce-name]
 
-## Requirements
-
-#### Functional
+## Functional Requirements
 - [list of functional requirements]
 
-#### Non-Functional
+## Non-Functional Requirements
 - [list of non functional requirements]
 
 ## Design
@@ -24,5 +22,5 @@
 #### Storage
 - [storage calculations]
 
-### Highlights
+## Highlights
 - [list of important points related to the design]
