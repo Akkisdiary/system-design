@@ -1,27 +1,28 @@
-# <serivce-name>
+# [serivce-name]
 
 ## Requirements
 
 #### Functional
-- <list of functional requirements>
+- [list of functional requirements]
 
 #### Non-Functional
-- <list of non functional requirements>
+- [list of non functional requirements]
 
 ## Design
 ![architecture](./diagrams/architecture.png)
+- [design components descriptions]
 
 ## Database schema
 ![db-schema](./diagrams/db-schema.png)
 
 ## Capacity estimation
-- <capacity assumptions>
+- [capacity assumptions]
 
 #### Throughput
-- <throughput calculations>
+- [throughput calculations]
 
 #### Storage
-- <storage calculations>
+- [storage calculations]
 
 ### Highlights
-- <list of important points related to the design>
+- [list of important points related to the design]
