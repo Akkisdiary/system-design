@@ -16,13 +16,13 @@
 4. Durability (shortened URLs should work for years)
 
 ## Capacity estimation
-- Daily shorten url requests: 1 million
+- Daily shorten url requests: 1 Million
 - Read/Write ratio: 100:1 (100 redirects for 1 shortened url per day)
 - Peak load: 10x the avg
 - Avg original url length: 100 characters
 
 #### Throughput
-- Avg writes per second: 1,000,000 / (60 * 60 * 24) ~ 12
+- Avg writes per second: 1M / (60 * 60 * 24) ~ 12
 - Peak WPS: 12 * 10 = 120
 - Avg redirects: 12 * 100 = 1,200
 - Peak RPS: 1200 * 10 = 12,000
